@@ -77,8 +77,8 @@ This project focuses on setting up the Ansible system on Centos Stream 9, standi
   The Winrm set up assumes you have PowerShell v3.0 or above, for other version follow the [ansible website recommendations](https://docs.ansible.com/ansible/latest/os_guide/windows_setup.html)
 
 ## Ansible Playbooks, Inventory, Programming
-## Finally after completing the main Ansible setup we can start creating playbooks to control multiple servers and other devices
-Please [click here]() to find the step to perform the following:
+Finally after completing the main Ansible setup we can start creating playbooks to control multiple servers and other devices
+Please [click here](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/ansible_todo.md) to find the step to perform the following:
   * Creating directories for Playbooks, Inventory, and authorization keys
   * YAML file for servers and switches inventory
   * YAML files for Playbooks: Windows and Ubuntu system updates, and cleaning log files 
