@@ -22,3 +22,16 @@
     + For Ubuntu we will only need the server user and its pem key(the pem key was oabtained from AWS when the instance was created), I used the same pem key for both for both of the Ubuntu servers 
   * [Hosts_Cisco Switches](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/inventory/hosts_switches)
     + The switches will require it IP addresses and an admin user created in the switch configuration.
+ 5. Now we navigate back to the Playbook directoy to creae the configuration task we want to apply to the servers and switches. I stareted by creating the files then programmed the tasks using YAML
+ ###
+    cd ~/my_ansible/playbooks
+    touch arc_ubulogs.yml arc_winlogs.yml update_ubusrvs.yml update_winsrv.yml vlans.yml rem_vlans.yml win_ping.yml
+ 6. The YAML files contains the instructions of that want the severs and switches to do and this can be applied to multiple devices of the same by running a sigle command. The task confifuration of my project can be check in the follwing files
+    *  [arc_ubulogs.yml](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/playbooks/arc_ubulogs.yml) This Playbook archives and removes old log files of a specific directory that are older than 1 day
+    *  [arc_winlogs.yml](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/playbooks/arc_winlogs.yml) This Playbook archives and removes Windows old log files of a specific directory that are older than 1 day
+    *  [update_ubusrvs.yml](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/playbooks/update_ubusrvs.yml) This Playbook installs the latest updated for all the ubuntu servers
+    *  [update_winsrv.yml](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/playbooks/update_winsrv.yml) This Playbook installs Security Windows updates on all the Windows servers
+    *  [vlans.yml](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/playbooks/vlans.yml)  This playbook creates and names 3 diffrent vlans on all the cisco switches
+    *  [rem_vlans.yml](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/playbooks/rem_vlans.yml) This playbook deletes the 3 diffrent vlans on all the cisco switches
+    *  [win_ping.yml](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/playbooks/win_ping.yml) This Playbook is used to test ping the Windows servers
+   
