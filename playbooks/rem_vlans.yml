@@ -1,0 +1,22 @@
+---
+# This playbook removes vlans 100, 200, and 300
+
+- hosts: all
+  gather_facts: false
+  connection: local
+
+
+  tasks:
+    - name: Delete Multiple VLANs
+      ios_vlans:
+        config:
+          - vlan_id: 100
+          - vlan_id: 200
+          - vlan_id: 300
+        state: deleted
+      register: vln
+
+    - debug:
+        var: vln.commands
+    - debug:
+        var: vln.after

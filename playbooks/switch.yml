@@ -1,0 +1,38 @@
+---
+- name: Create VLAN if dot't exits
+  hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+    vlan_id: 10
+    vlan_name: student
+    interface: GigabitEhternet0/5
+
+  tasks:
+# Run show vlan id and register the result     
+    - name: Collect facts about VLAN "{{ vlan_id }}" on device
+      ios_command:
+        commands: show vlan id "{{ vlan_id }}" | include enet
+      register: sh_vlan_output
+
+# Check is vlan is defined, do nothing if already exits
+    - set_fact:
+         vlan_exist: false
+      when: sh_vlan_output.stdout_lines is defined
+
+# Check  if vlan its undefined, else run task to add it
+    - set_fact:
+        vlan_exists: true
+      when: sh_vlan_output.stdout_lines is undefined 
+
+# add vlan with name and interfaces
+    - name: Add vlan using aggregate
+      cisco.ios.ios_vlans:
+        aggregate:
+        - {vlan_id: "{{ vlan_id }}", name: "{{ vlan_name }}", interfaces: "{{ interface }}" }
+# Save to start-config when modified
+    - name: sace running to start-config when modifed
+      ios_config:
+        save_when: modified
+

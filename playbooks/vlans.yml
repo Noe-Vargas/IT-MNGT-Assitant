@@ -1,0 +1,68 @@
+---
+- hosts: all
+  gather_facts: false
+  connection: local
+  
+  vars:
+    vlan_id: 100
+    vlan_name: student-wifi
+    vlan_id_2: 200
+    vlan_name_2: staff-wifi
+    vlan_id_3: 300
+    vlan_name_3: guest-wifi
+
+
+
+  tasks:
+# Create VLan 100
+    - name: Configure VLAN ID
+      ios_config:
+        lines:
+          - vlan {{ vlan_id }}
+
+    - name: Configure VLAN Name
+      ios_config:
+        lines:
+          - name {{ vlan_name }}
+        parents: vlan {{ vlan_id }}
+
+    - name: Show VLAN
+      ios_command:
+        commands: show vlan brief
+      register: show_vlan
+
+# Create Vlan 200
+    - name: Configure VLAN ID
+      ios_config:
+        lines:
+          - vlan {{ vlan_id_2 }}
+
+    - name: Configure VLAN Name
+      ios_config:
+        lines:
+          - name {{ vlan_name_2 }}
+        parents: vlan {{ vlan_id_2 }}
+
+    - name: Show VLAN
+      ios_command:
+        commands: show vlan brief
+      register: show_vlan
+
+# Create VlAN 300
+    - name: Configure VLAN ID
+      ios_config:
+        lines:
+          - vlan {{ vlan_id_3 }}
+
+    - name: Configure VLAN Name
+      ios_config:
+        lines:
+          - name {{ vlan_name_3 }}
+        parents: vlan {{ vlan_id_3 }}
+
+    - name: Show VLAN
+      ios_command:
+        commands: show vlan brief
+      register: show_vlan
+
+    - debug: var=show_vlan.stdout_lines

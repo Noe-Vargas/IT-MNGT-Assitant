@@ -1,0 +1,42 @@
+---
+- name: Compress the directories contents
+  hosts: all
+  tasks:
+    - name: Compressing directory
+      community.windows.win_zip:
+        src: C:\Windows\MyLogs
+        dest: C:\Users\Administrator\Desktop\Logs_Archived\log.zip
+- name: Deleting old log file
+  hosts: all
+  vars:
+    directories: C:\Windows\MyLogs
+    filepattern: '*.log'
+    age: 3m
+  tasks:
+    - name: Find Log LogFiles
+      tags: always
+      win_find:
+        paths: '{{directories}}'
+        age: '{{age}}'
+        age_stamp: mtime
+        patterns: '{{filepattern}}'
+        recurse: 'yes'
+      register: filestoremove
+    - name: list of files to be removed
+      tags: always
+      vars:
+        files: '{{ filestoremove.files | json_query(''[].path'') }}'
+      debug: var=files
+      when: filestoremove.matched > 0
+    - name: >-
+        remove the files found - this would work only when you call the
+        --tags=delete
+      tags: 'delete'
+      vars:
+        files: '{{ filestoremove.files | json_query(''[].path'') }}'
+      win_file:
+        path: '{{item}}'
+        state: absent
+      with_items:
+        - '{{files}}'
+      when: filestoremove.matched > 0

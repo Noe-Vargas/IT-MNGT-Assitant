@@ -1,0 +1,21 @@
+---
+- hosts: all
+  vars:
+    files_to_archive: "{{ files.files | map(attribute='path') | list }}"
+  tasks:
+    - name: compress all the files in tar.gz
+      archive:
+        path: "/home/ubuntu/mylogs"
+        dest: /home/ubuntu/arc_logs/logs.tar.gz
+        format: gz
+    - name: find all files that are older than 1 hour
+      find:
+        paths: /home/ubuntu/mylogs
+        age: 1h
+        recurse: yes
+      register: filesOlderThan1
+    - name: remove older than 1
+      file:
+        path: "{{ item.path }}" 
+        state: absent
+      with_items: "{{ filesOlderThan1.files }}"
