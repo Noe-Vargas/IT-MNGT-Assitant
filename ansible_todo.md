@@ -35,3 +35,21 @@
     *  [rem_vlans.yml](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/playbooks/rem_vlans.yml) This playbook deletes the 3 diffrent vlans on all the cisco switches
     *  [win_ping.yml](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/playbooks/win_ping.yml) This Playbook is used to test ping the Windows servers
    
+7. Before we can run the playbooks we must test the communciation with the server and switches by pinging them, if the server can not be ping we must troublshsoot the errors. The following lines were bused to ping the servers
+###
+    ansible-playbook playbooks/win_ping -i inventory/hosts_win.yml   This lines used a playbok to ping the Windows servers
+    ansible all -m ping -i inventoty/hosts_ubu.yml
+    ansible all -m ping -i inventoty/hosts_switches.yml
+ 8. Once we have confirmed successfull pings we can run the playbook using these commands
+ ###
+    ansible-playbook playbook/arc_winlogs.yml -i inventory/hosts_win
+    ansible-playbook playbook/arc_ubulogs.yml -i inventory/hosts_ubu
+    ansible-playbook playbook/vlans.yml -i inventory/hosts_switches
+ and so on for the rest of the playbook, we run the same command and subtitute the playbook we desire to run and the correst hosts to apply it to.
+
+ 9. Lastly I have attched a Cisco Guide on how to set up its basic configuration, for my project I used two Cisco Catalyst 3560-CG, the switch must be configured before sending any tasks from ansible. I followrd the guide sugestions an set the basic confiuration, the only thing I set up different was the switch IP address; instead of setting a static IP I changed it to DCHP. I used DHCP so that I didn't have to mess with my home router and for presentation purposes but if desired and recomneded to use static IP specailly if the swithc is used in a enterprise company.
+    * [Cisco configuration Guide](https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-1_19_ea1/configuration/guide/3560scg.pdf)
+ ###
+    To run the playbook on the switches the same command applies
+      ansible-playbook playbooks/vlans.yml -i inventory/hosts_switches.yml
+      
