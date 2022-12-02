@@ -88,10 +88,27 @@ Please [click here](https://github.com/Noe-Vargas/IT-MNGT-Assitant/blob/main/ans
   * Run playbook to create and remove VLANS from switches 
 
 ## Results 
+1. Results of pinging the the Windows servers and Ubuntu servers:
+  * [Ping_Results](https://user-images.githubusercontent.com/119148009/205192585-b6727283-0f11-4672-a7c1-6ebe4ff1569a.png)
+3. Results from updating The Ubuntu servers: 
+  * [Update_Results](https://user-images.githubusercontent.com/119148009/205192785-3db5d47c-5286-4a1b-a1a2-6c1c7a197d09.png)
+5. Results from updating the Windows Severs (the task perfomed successfully but AWS keeps these server udpated therefore no missing upates were found to apply)
+  * [Results_clip](https://user-images.githubusercontent.com/119148009/205193243-316857a0-c28c-4813-af05-9076ccc80d38.mov)
+6. Results from cleaning up the log files older than 1 day from Windows servers 
+  * [Results_Part1](https://user-images.githubusercontent.com/119148009/205201300-f49f48db-8f9e-4ca0-aacc-d633c3ee5ba9.png),  [Results_Part2](https://user-images.githubusercontent.com/119148009/205201510-83fc7ec0-3306-4dff-9416-ef1353f443ef.png)
+8. Results from cleaning up the log files older than 1 day from Ubuntu servers 
+  * [Results](https://user-images.githubusercontent.com/119148009/205203739-aed37dc6-9fd9-4473-8cd8-538e4ed844ef.png)
+10. Results from adding and removing VLAN to the Cisco Switches
+  * [Add-VLANS_part1](https://user-images.githubusercontent.com/119148009/205204452-8d9e3de8-91a0-4702-bc18-58f5c2b11336.png),  [Add-VLANS_part2](https://user-images.githubusercontent.com/119148009/205204621-48b6a370-870d-4898-b211-fdc1c4bf072a.png),  [Removed-VLANS_part1](https://user-images.githubusercontent.com/119148009/205204958-f63a582a-4963-4bb4-a7ef-b72c0c65de7a.png),  [Removed-VLANS_part2](https://user-images.githubusercontent.com/119148009/205205350-44b77fba-eb62-462c-b189-fe006d1b75d6.png)
 
 ## For future students looking to expand this project
+  * Add security connection for Windows Severs to use encryption on the host file instead of plain passwords
+  * Create Playbook that can send alert for hardware failures or system booting errors
+  * Create Playboo to control other brands of Managed Network Switches such as Juniper to Brocade switches
+  * Add more playbooks that are time-consuming for IT Admins. 
+
 ## Acknowledgments
-* Professor Jasson Issacs
-* Kevin Scrivnor
-* Clark Devlin
+* Professor Jasson Issacs (CSUCI Professor  & Capston Advisor)
+* Kevin Scrivnor (CSUCI IT/CS Professor)
+* Clark Devlin (HESD Director of Technology)
 
